@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu]
-public class Tower : ScriptableObject
+public class Tower : MonoBehaviour
 {
-    public int Cost;
-    public string Name;
-    public GameObject Prefab;
+    public TowerBlueprint Blueprint;
+    public PlayerStats PlayerStats;
+
+    public void Sell()
+    {
+        PlayerStats.GainMoney((int)(Blueprint.Cost * 0.5f));
+    }
 }
