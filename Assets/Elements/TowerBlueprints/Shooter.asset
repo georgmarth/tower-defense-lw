@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe86031383ed454c98f36f3d2b5908a, type: 3}
   m_Name: Shooter
   m_EditorClassIdentifier: 
-  Cype: 0
-  Cost: 0
-  Prefab: {fileID: 0}
+  Cost: 10
+  Name: TestShooter
+  Prefab: {fileID: 370226451090226378, guid: 0a78ff8c35b9ff34ab2a22878702b23f, type: 3}

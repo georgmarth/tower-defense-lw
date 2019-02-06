@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class Plot : MonoBehaviour
 {
-    public Tower Tower;
+    public Transform TowerPlacement;
+
+    
+    private Tower Tower;
 
     public void BuildTower(TowerBlueprint tower)
     {
-
+        if (Tower == null)
+        {
+            GameObject towerInstanceObject = Instantiate(tower.Prefab, TowerPlacement.position, TowerPlacement.rotation, TowerPlacement);
+            Tower = towerInstanceObject.GetComponent<Tower>();
+        }
     }
 
     public void SellTower()
