@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TowerPlacement: {fileID: 7503850472256378845}
+  PlayerStats: {fileID: 11400000, guid: e52bbb3ff75bcb047b27e8ebe9af5e2b, type: 2}
 --- !u!114 &538072707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +187,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 538072708}
-          m_MethodName: BuildTower
+          m_MethodName: Click
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 11400000, guid: cbf25e3ab063f474cafcaf7a38805f41,

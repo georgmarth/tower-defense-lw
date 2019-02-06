@@ -8,5 +8,6 @@ public class Tower : MonoBehaviour
     public void Sell()
     {
         PlayerStats.GainMoney((int)(Blueprint.Cost * 0.5f));
+        Destroy(gameObject);
     }
 }

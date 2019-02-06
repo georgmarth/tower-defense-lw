@@ -5,16 +5,20 @@ using UnityEngine;
 public class Plot : MonoBehaviour
 {
     public Transform TowerPlacement;
-
+    public PlayerStats PlayerStats;
     
     private Tower Tower;
 
-    public void BuildTower(TowerBlueprint tower)
+    public void BuildTower(TowerBlueprint towerBP)
     {
         if (Tower == null)
         {
-            GameObject towerInstanceObject = Instantiate(tower.Prefab, TowerPlacement.position, TowerPlacement.rotation, TowerPlacement);
-            Tower = towerInstanceObject.GetComponent<Tower>();
+            if (PlayerStats.Pay(towerBP.Cost))
+            {
+                GameObject towerInstanceObject = Instantiate(towerBP.Prefab, TowerPlacement.position, TowerPlacement.rotation, TowerPlacement);
+                Tower = towerInstanceObject.GetComponent<Tower>();
+                Tower.PlayerStats = PlayerStats;
+            }
         }
     }
 
@@ -24,6 +28,18 @@ public class Plot : MonoBehaviour
         {
             Tower.Sell();
             Tower = null;
+        }
+    }
+
+    public void Click(TowerBlueprint tower)
+    {
+        if (Tower == null)
+        {
+            BuildTower(tower);
+        }
+        else
+        {
+            SellTower();
         }
     }
 }
