@@ -26,7 +26,7 @@ public class PlayerStats : ScriptableObject
         {
             int oldAmount = Money;
             Money -= amount;
-            OnMoneyChanged.Invoke(oldAmount, Money);
+            OnMoneyChanged?.Invoke(oldAmount, Money);
             return true;
         }
         return false;
@@ -36,7 +36,7 @@ public class PlayerStats : ScriptableObject
     {
         int oldAmount = Money;
         Money += amount;
-        OnMoneyChanged.Invoke(oldAmount, Money);
+        OnMoneyChanged?.Invoke(oldAmount, Money);
     }
 }
 
