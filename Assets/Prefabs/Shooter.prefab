@@ -47,11 +47,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b879765ae4bf78e4ba1069102c0ed6b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LookRadius: 3
+  LookRadius: 5
   EnemyMask:
     serializedVersion: 2
     m_Bits: 512
   TowerHead: {fileID: 5388982527302360151}
+  Spawner: {fileID: 1153142162798342895}
+  Beans:
+  - {fileID: 1619121606, guid: 629807a474d3f904c81588fe9760c0e6, type: 3}
+  - {fileID: 1070055242204888711, guid: 23afa89cbee2c6d4fb565f5eacf4405a, type: 3}
+  - {fileID: 3934885287687568398, guid: b1c91f40f65c62f4b8611fd6799535b4, type: 3}
+  - {fileID: 6598384797315583138, guid: a7916425598d61c4691009f50fab12d2, type: 3}
+  - {fileID: 1039809258608032435, guid: f0edb65c5724ae84fb720c0abcb26acf, type: 3}
+  - {fileID: 6941361288116911626, guid: bd79adae21719684c9a6dc2c0aad9f43, type: 3}
+  - {fileID: 287134843547332959, guid: 8b8f4e1eb89b1344ba06bcb34ef99d07, type: 3}
+  Rate: 0.5
+  EjectVelocity: 20
 --- !u!114 &4424152897688560476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,6 +444,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7892526925929455352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1153142162798342895}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1153142162798342895
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7892526925929455352}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.686}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5388982527302360151}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8395432043651826777
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,6 +503,7 @@ Transform:
   m_Children:
   - {fileID: 280760033736480652}
   - {fileID: 625286853350866544}
+  - {fileID: 1153142162798342895}
   m_Father: {fileID: 7156763748883090405}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
