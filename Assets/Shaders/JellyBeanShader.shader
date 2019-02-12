@@ -15,7 +15,7 @@ Shader "Custom/JellyBeanShader"
 		_Noise2Factor("Strength of Noise 2", Range(0,1)) = 0.3
 		_Contrast("Contrast of Smoothness", Range(-5, 5)) = 0
 		_Brightness("Brightness of Smoothness", Range(-5, 5)) = 0
-		_TangentDst("Tangent lookup distance", Float) = 1
+		_TangentDst("Tangent lookup distance", Float) = 0
 		_NormalStrength("Strength of normal Input", Float) = 1
     }
 
@@ -49,7 +49,7 @@ Shader "Custom/JellyBeanShader"
 		half _Noise2Factor;
 		half _Contrast;
 		half _Brightness;
-		half _Tangent_Dst;
+		float _TangentDst;
 		half _NormalStrength;
 		fixed4 _Color;
 		fixed4 _Color2;
@@ -78,8 +78,8 @@ Shader "Custom/JellyBeanShader"
 			half3 tangent_input = normalize(p_tangent.xyz);
 			half3 binormal_input = cross(p_normal.xyz, tangent_input.xyz) * i.tangent.w;
 
-			o.tangent_input = tangent_input;
-			o.binormal_input = binormal_input;
+			o.tangent_input = normalize(i.tangent);
+			o.binormal_input = normalize(cross(p_normal.xyz, o.tangent_input));
 			o.objPos = objPos;
 		}
 
@@ -92,6 +92,7 @@ Shader "Custom/JellyBeanShader"
 			float3 objPos = IN.objPos;
 
 			float noise1 = cnoise(objPos * _NoiseScale);
+			float pointValue = noise1;
 			float noise2 = cnoise((objPos * _NoiseScale2) + offset);
 			noise1 = (noise1 + 1) * 0.5 * (1 - _Noise2Factor);
 			noise2 = (noise2 + 1) * 0.5 * _Noise2Factor;
@@ -116,7 +117,29 @@ Shader "Custom/JellyBeanShader"
 
 			// calc normal vector
 
-			//float3 tangent
+			float3 tangentPos = objPos + (IN.tangent_input * _TangentDst);
+			float3 binormalPos = objPos + (IN.binormal_input * _TangentDst);
+
+			float tangentValue = cnoise(tangentPos * _NoiseScale);
+			float binormalValue = cnoise(binormalPos * _NoiseScale);
+
+			float tangentDiff = tangentValue - pointValue;
+			float binormalDiff = binormalValue - pointValue;
+
+			/*float invTangentDst = 1 / _TangentDst;
+
+			float tangentSlope = atan(tangentDiff * invTangentDst);
+			float binormalSlope = atan(binormalDiff * invTangentDst);
+
+			float tangentPart = tangentSlope * UNITY_INV_HALF_PI;
+			float binormalPart = binormalSlope * UNITY_INV_HALF_PI;*/
+
+			float3 normalVector = normalize(float3(tangentDiff * _NormalStrength , binormalDiff * _NormalStrength, 1));
+
+			o.Normal = normalVector;
+
+			//o.Albedo = (normalVector * 0.5 + 0.5).rgb;
+			//o.Albedo = IN.tangent_input;
 
             o.Alpha = 1;
         }
